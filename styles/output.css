@@ -345,6 +345,9 @@
       max-width: 96rem;
     }
   }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -441,6 +444,9 @@
   }
   .h-39 {
     height: calc(var(--spacing) * 39);
+  }
+  .h-48 {
+    height: calc(var(--spacing) * 48);
   }
   .h-56 {
     height: calc(var(--spacing) * 56);
@@ -728,6 +734,9 @@
   }
   .bg-green-500 {
     background-color: var(--color-green-500);
+  }
+  .bg-lime-500 {
+    background-color: var(--color-lime-500);
   }
   .bg-red-100 {
     background-color: var(--color-red-100);

@@ -39,33 +39,46 @@ async function loadModules() {
 // Initialize search function
 function initializeSearch() {
   const searchInput = document.getElementById("searchInput");
-  if (searchInput) {
-    const debouncedSearch = debounce((e) => {
+  if (searchInput && appModules.geraldine) {
+    const debouncedSearch = appModules.geraldine.debounce((e) => {
       const query = e.target.value.trim();
-      searchCharacter(query);
+      appModules.geraldine.searchCharacter(query);
     }, 500);
     searchInput.addEventListener("input", debouncedSearch);
   }
 }
 
 // Initialize everything when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  console.log('Initializing Rick and Morty app...');
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log('Loading Rick and Morty app modules...');
   
-  // Initialize header menu
-  click();
+  const modulesLoaded = await loadModules();
   
-  // Initialize carousel
-  initCarousel();
+  if (!modulesLoaded) {
+    console.error('Failed to load modules');
+    return;
+  }
   
-  // Initialize main components
-  initializeCards();
-  initializeFavorites();
-  initDarkMode();
-  initializeSearch();
-  initializeFilters();
-  fillSelectOptions();
+  console.log('Modules loaded, initializing app...');
   
-  console.log('App initialization complete');
+  try {
+    // Initialize header menu
+    appModules.header.click();
+    
+    // Initialize carousel
+    appModules.carousel.initCarousel();
+    
+    // Initialize main components
+    appModules.cards.initializeCards();
+    appModules.favorites.initializeFavorites();
+    appModules.darkmode.initDarkMode();
+    initializeSearch();
+    appModules.geraldine.initializeFilters();
+    appModules.geraldine.fillSelectOptions();
+    
+    console.log('App initialization complete');
+  } catch (error) {
+    console.error('Error during initialization:', error);
+  }
 });
 
