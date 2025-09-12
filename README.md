@@ -1,18 +1,18 @@
 Participación de cada Estudiante:
 
-//NEFI:
+1. NEFI
  - Listado de Cards
  - Modal de personajes
  - Favoritos
  - Darkmode
-//EDMUND:
+2. EDMUND:
  - Header Carrusel
  - Video de Episodio 
-//SANTIAGO:
+3. SANTIAGO:
  - Header Video
-//JESUS:
+4. JESUS:
  - Menu de navegación
-//GERALDINE:
+5. GERALDINE:
  - Filtros combinados
  - Busqueda con debounce
  - Darkmode
