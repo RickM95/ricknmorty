@@ -16,6 +16,3 @@ const debouncedSearch = debounce((e) => {
 }, 500);
 searchInput.addEventListener("input", debouncedSearch);
 fillSelectOptions();
-[filterStatus, filterGender, filterSpecies].forEach((select) => {
-  select.addEventListener("change", fillterAll);
-});
