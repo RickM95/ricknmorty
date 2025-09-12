@@ -1,0 +1,128 @@
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+}
+
+/* Search Input Dark Mode */
+.dark-mode #searchInput {
+  background-color: #2d2d2d;
+  border-color: #4a4a4a;
+  color: #e5e5e5;
+}
+
+.dark-mode #searchInput::placeholder {
+  color: #a0a0a0;
+}
+
+.dark-mode #searchInput:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+/* Filter Button Dark Mode */
+.dark-mode #toggleFilters {
+  background-color: #22c55e;
+  color: #1a1a1a;
+}
+
+.dark-mode #toggleFilters:hover {
+  background-color: #16a34a;
+}
+
+/* Filter Container Dark Mode */
+.dark-mode #filtersContainer {
+  background-color: #2d2d2d;
+  border: 1px solid #4a4a4a;
+  color: #e5e5e5;
+}
+
+.dark-mode #filtersContainer select {
+  background-color: #1a1a1a;
+  border-color: #4a4a4a;
+  color: #e5e5e5;
+}
+
+/* Character Cards Dark Mode */
+.dark-mode .character-card {
+  background: linear-gradient(135deg, rgba(20, 20, 40, 0.95) 0%, rgba(30, 60, 20, 0.95) 25%, rgba(40, 80, 15, 0.95) 50%, rgba(50, 90, 10, 0.95) 75%, rgba(70, 100, 20, 0.95) 100%);
+}
+
+.dark-mode .character-card .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .character-card .text-slate-800 {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .character-card .text-slate-700 {
+  color: #f3f4f6 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .character-card .text-green-700 {
+  color: #22c55e !important;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.dark-mode .character-card h3 {
+  color: #ffffff !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.dark-mode .character-card .bg-white\/20 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  border-color: rgba(34, 197, 94, 0.5) !important;
+}
+
+/* Buttons Dark Mode */
+.dark-mode button:not(#darkModeToggle):not(#toggleFilters) {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  color: #e5e5e5;
+}
+
+.dark-mode button:not(#darkModeToggle):not(#toggleFilters):hover {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+}
+
+/* Load More Button Dark Mode */
+.dark-mode #load-more-btn {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.dark-mode #load-more-btn:hover {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+}
+
+/* Reset Button Dark Mode */
+.dark-mode #reset-filters-btn {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.dark-mode #reset-filters-btn:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+}
+
+/* Title Dark Mode */
+.dark-mode h2 {
+  color: #22c55e !important;
+}
+
+/* Carousel Controls Dark Mode - Keep Transparent */
+.dark-mode [data-carousel-prev],
+.dark-mode [data-carousel-next] {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark-mode [data-carousel-prev]:hover,
+.dark-mode [data-carousel-next]:hover {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark-mode [data-carousel-prev] svg,
+.dark-mode [data-carousel-next] svg {
+  color: white !important;
+}

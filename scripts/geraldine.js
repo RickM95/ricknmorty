@@ -1,4 +1,4 @@
-import { renderCharacterCards } from "./cards.js";
+import { renderFilteredCharacters } from "./cards.js";
 //---------FILTER DEBOUNCE BY CHARACTER -----------------//
 export function debounce(fn, delay) {
   let timeoutId;
@@ -8,7 +8,12 @@ export function debounce(fn, delay) {
   };
 }
 export async function searchCharacter(query) {
-  if (!query) return;
+  if (!query) {
+    // Reset to initial view when search is empty
+    const { resetToInitialView } = await import('./cards.js');
+    resetToInitialView();
+    return;
+  }
   const url = `https://rickandmortyapi.com/api/character/?name=${query}`;
   try {
     const res = await fetch(url);
@@ -18,7 +23,7 @@ export async function searchCharacter(query) {
       console.log("No characters found");
       return;
     }
-    renderCharacterCards(data.results);
+    renderFilteredCharacters(data.results);
   } catch (error) {
     console.error("Error Searching:", error);
   }
@@ -77,7 +82,7 @@ export async function fillterAll() {
       alert("No results found");
       return;
     }
-    renderCharacterCards(data.results);
+    renderFilteredCharacters(data.results);
   } catch (error) {
     console.error("Error Filtering:", error);
   }
@@ -87,3 +92,5 @@ export async function fillterAll() {
 [filterStatus, filterGender, filterSpecies].forEach((select) => {
   select.addEventListener("change", fillterAll);
 });
+
+

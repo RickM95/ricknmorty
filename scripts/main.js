@@ -10,9 +10,11 @@ initCarousel();
 /* Starts the aplication when the DOM is loading */
 import { initializeCards } from "./cards.js";
 import { initializeFavorites } from "./favorites.js";
+import { initDarkMode } from "./darkmode.js";
 document.addEventListener("DOMContentLoaded", () => {
   initializeCards();
   initializeFavorites();
+  initDarkMode();
 });
 
 /*Search & Search Preferences Interaction*/
