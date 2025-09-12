@@ -69,7 +69,7 @@ export function createErrorCard() {
 export function createCharacterCard(character) {
   return `
     <div class="character-card relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 backdrop-blur-md md:h-[280px]" 
-         onclick="toggleCardDetails(${character.id})" 
+         onclick="openCardDetails(${character.id})" 
          style="background: linear-gradient(135deg, rgba(48, 48, 85, 0.7) 0%, rgba(68, 138, 50, 0.7) 25%, rgba(110, 197, 28, 0.7) 50%, rgba(159, 203, 15, 0.7) 75%, rgba(229, 236, 47, 0.7) 100%); backdrop-filter: blur(10px);">
       <div class="bg-white/10 p-6 h-full backdrop-blur-sm transition-all duration-500">
         <!-- Botón favorito -->
@@ -203,6 +203,10 @@ export function renderCharacterCards(characters) {
                 class="${!isFiltering ? "hidden" : ""} bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
           Mostrar todos los personajes
         </button>
+        <button onclick="showAllCharacters()" 
+                class="${!isFiltering ? "hidden" : ""} bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
+          Volver a personajes
+        </button>
         <button id="load-less-btn" 
                 class="${isFiltering || allCharacters.length <= initialCharacters.length ? "hidden" : ""} bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
           Cargar menos personajes
@@ -233,38 +237,81 @@ export function renderCharacterCards(characters) {
   }
 }
 
+let currentOpenCard = null;
+
 /**
- * Alterna la visualización de información detallada de una tarjeta de personaje
+ * Abre los detalles de una tarjeta de personaje
  * @param {number} characterId - ID del personaje
  */
-export function toggleCardDetails(characterId) {
+export function openCardDetails(characterId) {
+  // Cerrar tarjeta anterior si existe
+  if (currentOpenCard && currentOpenCard !== characterId) {
+    closeCardDetails(currentOpenCard);
+  }
+  
   const normalElement = document.querySelector(`#normal-${characterId}`);
   const expandedElement = document.querySelector(`#expanded-${characterId}`);
 
-  if (normalElement && expandedElement) {
-    if (normalElement.classList.contains("hidden")) {
-      // Mostrar estado normal
-      expandedElement.classList.add("opacity-0", "scale-95");
+  if (normalElement && expandedElement && !normalElement.classList.contains("hidden")) {
+    // Mostrar estado expandido
+    normalElement.classList.add("opacity-0", "scale-95");
+    setTimeout(() => {
+      normalElement.classList.add("hidden");
+      expandedElement.classList.remove("hidden");
       setTimeout(() => {
-        expandedElement.classList.add("hidden");
-        normalElement.classList.remove("hidden");
-        setTimeout(() => {
-          normalElement.classList.remove("opacity-0", "scale-95");
-        }, 50);
-      }, 250);
-    } else {
-      // Mostrar estado expandido
-      normalElement.classList.add("opacity-0", "scale-95");
+        expandedElement.classList.remove("opacity-0", "scale-95");
+      }, 50);
+    }, 250);
+    currentOpenCard = characterId;
+  }
+}
+
+/**
+ * Cierra los detalles de una tarjeta de personaje
+ * @param {number} characterId - ID del personaje
+ */
+export function closeCardDetails(characterId) {
+  const normalElement = document.querySelector(`#normal-${characterId}`);
+  const expandedElement = document.querySelector(`#expanded-${characterId}`);
+
+  if (normalElement && expandedElement && normalElement.classList.contains("hidden")) {
+    // Mostrar estado normal
+    expandedElement.classList.add("opacity-0", "scale-95");
+    setTimeout(() => {
+      expandedElement.classList.add("hidden");
+      normalElement.classList.remove("hidden");
       setTimeout(() => {
-        normalElement.classList.add("hidden");
-        expandedElement.classList.remove("hidden");
-        setTimeout(() => {
-          expandedElement.classList.remove("opacity-0", "scale-95");
-        }, 50);
-      }, 250);
+        normalElement.classList.remove("opacity-0", "scale-95");
+      }, 50);
+    }, 250);
+    currentOpenCard = null;
+  }
+}
+
+/**
+ * Maneja el clic fuera de las tarjetas para cerrarlas
+ */
+function handleOutsideClick(event) {
+  if (currentOpenCard) {
+    const cardElement = event.target.closest('.character-card');
+    if (!cardElement) {
+      closeCardDetails(currentOpenCard);
     }
   }
 }
+
+/**
+ * Maneja la tecla ESC para cerrar tarjetas
+ */
+function handleEscapeKey(event) {
+  if (event.key === 'Escape' && currentOpenCard) {
+    closeCardDetails(currentOpenCard);
+  }
+}
+
+// Agregar event listeners globales
+document.addEventListener('click', handleOutsideClick);
+document.addEventListener('keydown', handleEscapeKey);
 
 /**
  * Carga más personajes (siguientes 10)
@@ -359,6 +406,46 @@ export function updateFavoriteStars() {
   });
 }
 
+/**
+ * Muestra solo los personajes favoritos
+ */
+export function showFavorites() {
+  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  
+  if (favorites.length === 0) {
+    // Mostrar mensaje si no hay favoritos
+    const cardsContainer = document.querySelector("#cards");
+    if (cardsContainer) {
+      cardsContainer.innerHTML = `
+        <div class="container mx-auto px-4 py-8">
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-600 mb-4">No tienes personajes favoritos</h3>
+            <p class="text-gray-500 mb-6">Agrega algunos personajes a favoritos haciendo clic en la estrella</p>
+            <button onclick="showAllCharacters()" class="bg-gradient-to-r from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Ver todos los personajes
+            </button>
+          </div>
+        </div>
+      `;
+    }
+    return;
+  }
+  
+  isFiltering = true;
+  renderCharacterCards(favorites);
+  setTimeout(() => updateFavoriteStars(), 100);
+}
+
+/**
+ * Vuelve a mostrar todos los personajes
+ */
+export function showAllCharacters() {
+  resetToInitialView();
+}
+
 // Hacer funciones disponibles globalmente para eventos onclick
-window.toggleCardDetails = toggleCardDetails;
+window.openCardDetails = openCardDetails;
+window.closeCardDetails = closeCardDetails;
 window.toggleFavorite = toggleFavorite;
+window.showFavorites = showFavorites;
+window.showAllCharacters = showAllCharacters;

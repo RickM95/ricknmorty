@@ -23,24 +23,19 @@
         muted
         loop
         playsinline>
-        <source src="./rick_pc.mp4" type="video/mp4" />
+        <source src="./images/header/rick_pc.mp4" type="video/mp4" />
       </video>
       <img
-        src="./rick-and-morty-rick.gif"
+        src="./images/header/rick-and-morty-rick.gif"
         alt="Rick and Morty"
         class="w-full h-39 object-cover object-center md:hidden" />
       <img
-        src="./rick_and_moty_tablet .jpg"
+        src="./images/header/rick_and_moty_tablet .jpg"
         alt="Rick and Morty"
         class="w-full h-full object-cover object-center hidden md:block lg:hidden" />
-      <video class="w-full h-full object-cover object-center hidden lg:block" autoplay muted loop playsinline>
-        <source src="./images/header/rick_pc.mp4" type="video/mp4" />
-      </video>
-      <img src="./images/header/rick-and-morty-rick.gif" alt="Rick and Morty" class="w-full h-39 object-cover object-center md:hidden" />
-      <img src="./images/header/rick_and_moty_tablet .jpg" alt="Rick and Morty" class="w-full h-full object-cover object-center hidden md:block lg:hidden" />
    
       <!--Header Menu- Jesus-->
-      <div class="p-2">
+      <div class="fixed top-4 right-4 z-50 p-2 md:hidden">
         <input
           hidden=""
           class="check-icon"
@@ -56,8 +51,52 @@
     </header>
 
     <div
+      class="hidden md:flex gap-6 creepster-regular stroke px-3 py-4 text-4xl"
+    >
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="#hero-section">Home</a>
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a
+          href="https://lasaventurasderickymorty6.blogspot.com/2025/08/temporada-1-episodio-1-piloto_9.html"
+          target="_blank"
+          >Episodes</a
+        >
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="#cards">Characters</a>
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="https://rickandmorty.fandom.com/es/wiki/Rickipedia" target="_blank">Wiki</a>
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="#search">Search</a>
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="#filter">Filter</a>
+      </div>
+      <div
+        class="drop-shadow-sm drop-shadow-[#00fc22] hover:scale-105 hover:bg-[#00fc22] hover:p-2 hover:rounded-2xl"
+      >
+        <a href="#" onclick="showFavorites(); return false;">Favorites</a>
+      </div>
+    </div>
+
+    <div
       id="menumodel"
-      class="hidden fixed rounded-br-2xl h-[27rem] w-[80%] bg-[url(https://i.pinimg.com/1200x/78/ee/c2/78eec22861c5d625fc304990ce3ace36.jpg)] bg-cover bg-center text-white p-3 gap-2 creepster-regular stroke">
+      class="hidden absolute z-40 rounded-br-2xl h-[27rem] w-[80%] bg-[url(https://i.pinimg.com/1200x/78/ee/c2/78eec22861c5d625fc304990ce3ace36.jpg)] bg-cover bg-center text-white p-3 gap-2 creepster-regular stroke">
       <div
         class="absolute inset-0 rounded-br-2xl h-full w-full bg-black/70"></div>
       <div>
@@ -67,6 +106,7 @@
         <div class="drop-shadow-sm drop-shadow-[#00fc22]">
           <a
             href="https://lasaventurasderickymorty6.blogspot.com/2025/08/temporada-1-episodio-1-piloto_9.html"
+            target="_blank"
             >Episodes</a
           >
         </div>
@@ -74,13 +114,13 @@
           <a href="#cards">Characters</a>
         </div>
         <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-          <a href="https://rickandmorty.fandom.com/es/wiki/Rickipedia">Wiki</a>
+          <a href="https://rickandmorty.fandom.com/es/wiki/Rickipedia" target="_blank">Wiki</a>
         </div>
         <div class="drop-shadow-sm drop-shadow-[#00fc22]">
           <a href="#search">Search</a>
         </div>
         <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-          <a href="">Favorites</a>
+          <a href="#" onclick="showFavorites(); return false;">Favorites</a>
         </div>
       </div>
     </div>
@@ -312,10 +352,10 @@
     </button>
     
    <!-- Video Link - Edmund-->
-    <div class="flex justify-center my-6">
+    <div class="flex justify-center my-6 px-4">
       <iframe
         src="https://nextgencloudtools.com/embed/tv/60625/1-1/"
-        class="w-[800px] h-[450px] max-w-full"
+        class="w-full max-w-4xl h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-lg"
         frameborder="0"
         allowfullscreen
         allow="autoplay; encrypted-media">
