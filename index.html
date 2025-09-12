@@ -10,87 +10,58 @@
       @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
     </style>
     <title>Rick and Morty</title>
-   </head>
+  </head>
   <body>
     <header class="bg-amber-200 h-35 w-full relative overflow-hidden border-2">
-      <video
-        class="w-full h-full object-cover object-center hidden lg:block"
-        autoplay
-        muted
-        loop
-        playsinline
-      >
+      <video class="w-full h-full object-cover object-center hidden lg:block" autoplay muted loop playsinline>
         <source src="./rick_pc.mp4" type="video/mp4" />
       </video>
-      <img
-        src="./rick-and-morty-rick.gif"
-        alt="Rick and Morty"
-        class="w-full h-39 object-cover object-center md:hidden"
-      />
-      <img
-        src="./rick_and_moty_tablet .jpg"
-        alt="Rick and Morty"
-        class="w-full h-full object-cover object-center hidden md:block lg:hidden"
-      />
-        <div class="p-2">
-          <input
-            hidden=""
-            class="check-icon"
-            id="check-icon"
-            name="check-icon"
-            type="checkbox"
-          />
-          <label id="menuheader" class="icon-menu" for="check-icon">
-            <div class="bar bar--1"></div>
-            <div class="bar bar--2"></div>
-            <div class="bar bar--3"></div>
-          </label>
-        </div>
+      <img src="./rick-and-morty-rick.gif" alt="Rick and Morty" class="w-full h-39 object-cover object-center md:hidden" />
+      <img src="./rick_and_moty_tablet .jpg" alt="Rick and Morty" class="w-full h-full object-cover object-center hidden md:block lg:hidden" />
+      <div class="p-2">
+        <input hidden="" class="check-icon" id="check-icon" name="check-icon" type="checkbox" />
+        <label id="menuheader" class="icon-menu" for="check-icon">
+          <div class="bar bar--1"></div>
+          <div class="bar bar--2"></div>
+          <div class="bar bar--3"></div>
+        </label>
+      </div>
     </header>
 
-
-     <div
-        id="menumodel"
-        class="hidden fixed rounded-br-2xl h-[27rem] w-[80%] bg-[url(https://i.pinimg.com/1200x/78/ee/c2/78eec22861c5d625fc304990ce3ace36.jpg)] bg-cover bg-center text-white p-3 gap-2 creepster-regular stroke"
-      >
-        <div
-          class="absolute inset-0 rounded-br-2xl h-full w-full bg-black/70"
-        ></div>
-        <div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a href="#hero-section">Home</a>
-          </div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a
-              href="https://lasaventurasderickymorty6.blogspot.com/2025/08/temporada-1-episodio-1-piloto_9.html"
-              >Episodes</a
-            >
-          </div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a href="#cards">Characters</a>
-          </div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a href="https://rickandmorty.fandom.com/es/wiki/Rickipedia"
-              >Wiki</a
-            >
-          </div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a href="#search">Search</a>
-          </div>
-          <div class="drop-shadow-sm drop-shadow-[#00fc22]">
-            <a href="">Favorites</a>
-          </div>
+    <div
+      id="menumodel"
+      class="hidden fixed rounded-br-2xl h-[27rem] w-[80%] bg-[url(https://i.pinimg.com/1200x/78/ee/c2/78eec22861c5d625fc304990ce3ace36.jpg)] bg-cover bg-center text-white p-3 gap-2 creepster-regular stroke"
+    >
+      <div class="absolute inset-0 rounded-br-2xl h-full w-full bg-black/70"></div>
+      <div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="#hero-section">Home</a>
+        </div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="https://lasaventurasderickymorty6.blogspot.com/2025/08/temporada-1-episodio-1-piloto_9.html">Episodes</a>
+        </div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="#cards">Characters</a>
+        </div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="https://rickandmorty.fandom.com/es/wiki/Rickipedia">Wiki</a>
+        </div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="#search">Search</a>
+        </div>
+        <div class="drop-shadow-sm drop-shadow-[#00fc22]">
+          <a href="">Favorites</a>
         </div>
       </div>
-     
+    </div>
+
     <div id="hero-section"></div>
 
     <div id="search"></div>
-    <div id="cards"></div>
-
+    <!-- Filtros -->
     <div class="max-w-4xl mx-auto mt-8 px-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <h2 class="text-2xl font-bold text-green-400 text-center">Character</h2>
-      <!-- Input -->
+
       <input
         type="text"
         id="searchInput"
@@ -118,6 +89,7 @@
         </div>
       </div>
     </div>
+    <div id="cards"></div>
 
     <footer></footer>
   </body>

@@ -1,12 +1,12 @@
 //---------FILTER DEBOUNCE BY CHARACTER -----------------//
-function debounce(fn, delay) {
+export function debounce(fn, delay) {
   let timeoutId;
   return (...args) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => fn(...args), delay);
   };
 }
-async function searchCharacter(query) {
+export async function searchCharacter(query) {
   if (!query) return;
   const url = `https://rickandmortyapi.com/api/character/?name=${query}`;
   try {
@@ -22,14 +22,6 @@ async function searchCharacter(query) {
     console.error("Error Searching:", error);
   }
 }
-const searchInput = document.getElementById("searchInput");
-
-const debouncedSearch = debounce((e) => {
-  const query = e.target.value.trim();
-  searchCharacter(query);
-}, 500);
-
-searchInput.addEventListener("input", debouncedSearch);
 
 //---------FILTERS GENDER, STATU, SPECIE -----------------//
 const toggleFiltersBtn = document.querySelector("#toggleFilters");
@@ -58,15 +50,14 @@ const speciesOptions = [
   "Unknown",
 ];
 // FILL SELECTIONS
-function fillSelectOptions() {
+export function fillSelectOptions() {
   filterStatus.innerHTML = `<option value="">Todos</option>` + statusOptions.map((s) => `<option value="${s}">${s}</option>`).join("");
   filterGender.innerHTML = `<option value="">Todos</option>` + genderOptions.map((g) => `<option value="${g}">${g}</option>`).join("");
   filterSpecies.innerHTML = `<option value="">Todos</option>` + speciesOptions.map((sp) => `<option value="${sp}">${sp}</option>`).join("");
 }
-fillSelectOptions();
 
 // LET'S FILTER
-async function filtrar() {
+export async function fillterAll() {
   const status = filterStatus.value;
   const gender = filterGender.value;
   const species = filterSpecies.value;
@@ -90,6 +81,3 @@ async function filtrar() {
 }
 
 // lISTEN TO CHANGES IN FILTERS
-[filterStatus, filterGender, filterSpecies].forEach((select) => {
-  select.addEventListener("change", filtrar);
-});
