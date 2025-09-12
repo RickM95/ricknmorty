@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Rick and Morty</title>
+    <link rel="stylesheet" href="./styles/output.css">
+    <link rel="stylesheet" href="styles/darkmode.css">
+</head>
+<body>
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-4">Test Page</h1>
+        
+        <!-- Test Dark Mode -->
+        <button id="darkModeToggle" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+            Toggle Dark Mode
+        </button>
+        
+        <!-- Test Search -->
+        <input type="text" id="searchInput" placeholder="Buscar personaje..." class="border p-2 rounded mb-4 w-full">
+        
+        <!-- Test Cards Container -->
+        <div id="cards"></div>
+        
+        <!-- Test Favorites -->
+        <button onclick="showFavorites()" class="bg-green-500 text-white px-4 py-2 rounded">
+            Show Favorites
+        </button>
+    </div>
+
+    <script type="module">
+        // Import all modules
+        import { initializeCards, showFavorites } from './scripts/cards.js';
+        import { initDarkMode } from './scripts/darkmode.js';
+        import { debounce, searchCharacter, initializeFilters, fillSelectOptions } from './scripts/geraldine.js';
+        
+        // Make functions global
+        window.showFavorites = showFavorites;
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing...');
+            
+            // Initialize dark mode
+            initDarkMode();
+            
+            // Initialize cards
+            initializeCards();
+            
+            // Initialize search
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                const debouncedSearch = debounce((e) => {
+                    const query = e.target.value.trim();
+                    searchCharacter(query);
+                }, 500);
+                searchInput.addEventListener('input', debouncedSearch);
+            }
+            
+            console.log('Initialization complete');
+        });
+    </script>
+</body>
+</html>

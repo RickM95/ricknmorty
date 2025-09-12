@@ -30,15 +30,29 @@ export async function searchCharacter(query) {
 }
 
 //---------FILTERS GENDER, STATU, SPECIE -----------------//
-const toggleFiltersBtn = document.querySelector("#toggleFilters");
-const filtersContainer = document.querySelector("#filtersContainer");
-const filterStatus = document.querySelector("#filterStatus");
-const filterGender = document.querySelector("#filterGender");
-const filterSpecies = document.querySelector("#filterSpecies");
+let toggleFiltersBtn, filtersContainer, filterStatus, filterGender, filterSpecies;
 
-toggleFiltersBtn.addEventListener("click", () => {
-  filtersContainer.classList.toggle("hidden");
-});
+// Initialize filter elements after DOM is loaded
+export function initializeFilters() {
+  toggleFiltersBtn = document.querySelector("#toggleFilters");
+  filtersContainer = document.querySelector("#filtersContainer");
+  filterStatus = document.querySelector("#filterStatus");
+  filterGender = document.querySelector("#filterGender");
+  filterSpecies = document.querySelector("#filterSpecies");
+
+  if (toggleFiltersBtn && filtersContainer) {
+    toggleFiltersBtn.addEventListener("click", () => {
+      filtersContainer.classList.toggle("hidden");
+    });
+  }
+
+  // Listen to changes in filters
+  if (filterStatus && filterGender && filterSpecies) {
+    [filterStatus, filterGender, filterSpecies].forEach((select) => {
+      select.addEventListener("change", fillterAll);
+    });
+  }
+}
 
 // ARRAY OF OPTIONS FOR EACH FILTER
 const statusOptions = ["alive", "dead", "unknown"];
@@ -57,6 +71,8 @@ const speciesOptions = [
 ];
 // FILL SELECTIONS
 export function fillSelectOptions() {
+  if (!filterStatus || !filterGender || !filterSpecies) return;
+  
   filterStatus.innerHTML = `<option value="">Todos</option>` + statusOptions.map((s) => `<option value="${s}">${s}</option>`).join("");
   filterGender.innerHTML = `<option value="">Todos</option>` + genderOptions.map((g) => `<option value="${g}">${g}</option>`).join("");
   filterSpecies.innerHTML =
@@ -66,6 +82,8 @@ export function fillSelectOptions() {
 
 // LET'S FILTER
 export async function fillterAll() {
+  if (!filterStatus || !filterGender || !filterSpecies) return;
+  
   const status = filterStatus.value;
   const gender = filterGender.value;
   const species = filterSpecies.value;
@@ -88,9 +106,6 @@ export async function fillterAll() {
   }
 }
 
-// lISTEN TO CHANGES IN FILTERS
-[filterStatus, filterGender, filterSpecies].forEach((select) => {
-  select.addEventListener("change", fillterAll);
-});
+
 
 
