@@ -1,10 +1,10 @@
 
 /*Header Menu interaction*/
-import { click } from "../scripts/funtion-header.js";
+import { click } from "./funtion-header.js";
 click();
 
 /*Carousel interaation*/
-import { initCarousel } from '/scripts/carousel.js';
+import { initCarousel } from './carousel.js';
 initCarousel();
 
 /* Starts the aplication when the DOM is loading */
