@@ -1,21 +1,21 @@
 Participación de cada Estudiante:
 
-NEFI:
-- Listado de Cards
-- Modal de personajes
-- Favoritos
-- Darkmode
-EDMUND:
-- Header Carrusel
-- Video de Episodio 
-SANTIAGO:
-- Header Video
-JESUS:
-- Menu de navegación
-GERALDINE:
-- Filtros combinados
-- Busqueda con debounce
-- Darkmode
+//NEFI:
+Listado de Cards
+Modal de personajes
+Favoritos
+Darkmode
+//EDMUND:
+Header Carrusel
+Video de Episodio 
+//SANTIAGO:
+Header Video
+//JESUS:
+Menu de navegación
+//GERALDINE:
+Filtros combinados
+Busqueda con debounce
+Darkmode
 
 
 Este desafío tiene una duración estimada de 5 a 6 horas y será realizado en grupos de 5 personas. Cada grupo trabajará con una API distinta: 
