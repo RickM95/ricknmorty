@@ -1,6 +1,17 @@
 let currentPage = 1;
 let allCharacters = [];
 let initialCharacters = [];
+let isFiltering = false;
+
+// Import functions from geraldine.js
+let searchCharacter, fillterAll;
+
+// Initialize imports when DOM is ready
+document.addEventListener('DOMContentLoaded', async () => {
+  const geraldineModule = await import('./geraldine.js');
+  searchCharacter = geraldineModule.searchCharacter;
+  fillterAll = geraldineModule.fillterAll;
+});
 
 const favStar = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
@@ -57,7 +68,7 @@ export function createErrorCard() {
  */
 export function createCharacterCard(character) {
   return `
-    <div class="relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 backdrop-blur-md md:h-[280px]" 
+    <div class="character-card relative rounded-2xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:shadow-2xl hover:scale-105 backdrop-blur-md md:h-[280px]" 
          onclick="toggleCardDetails(${character.id})" 
          style="background: linear-gradient(135deg, rgba(48, 48, 85, 0.7) 0%, rgba(68, 138, 50, 0.7) 25%, rgba(110, 197, 28, 0.7) 50%, rgba(159, 203, 15, 0.7) 75%, rgba(229, 236, 47, 0.7) 100%); backdrop-filter: blur(10px);">
       <div class="bg-white/10 p-6 h-full backdrop-blur-sm transition-all duration-500">
@@ -134,10 +145,44 @@ export function createCharacterCard(character) {
 }
 
 /**
+ * Resetea a la vista inicial de personajes
+ */
+export function resetToInitialView() {
+  console.log('Reseteando a vista inicial');
+  isFiltering = false;
+  allCharacters = initialCharacters;
+  currentPage = 1;
+  
+  // Reset filters and search
+  const filterStatus = document.querySelector("#filterStatus");
+  const filterGender = document.querySelector("#filterGender");
+  const filterSpecies = document.querySelector("#filterSpecies");
+  const searchInput = document.querySelector("#searchInput");
+  
+  if (filterStatus) filterStatus.value = "";
+  if (filterGender) filterGender.value = "";
+  if (filterSpecies) filterSpecies.value = "";
+  if (searchInput) searchInput.value = "";
+  
+  renderCharacterCards(allCharacters);
+  setTimeout(() => updateFavoriteStars(), 100);
+}
+
+/**
+ * Activa el modo filtrado y renderiza personajes filtrados
+ */
+export function renderFilteredCharacters(characters) {
+  console.log('Activando modo filtrado');
+  isFiltering = true;
+  renderCharacterCards(characters);
+}
+
+/**
  * Renderiza las tarjetas de personajes en el contenedor con grid responsivo
  * @param {Array} characters - Array de objetos de personajes
  */
 export function renderCharacterCards(characters) {
+  console.log('Renderizando cards, isFiltering:', isFiltering);
   const cardsContainer = document.querySelector("#cards");
   if (!cardsContainer) return;
 
@@ -154,14 +199,16 @@ export function renderCharacterCards(characters) {
         ${cardsHTML}
       </div>
       <div class="text-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+        <button id="reset-filters-btn" 
+                class="${!isFiltering ? "hidden" : ""} bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
+          Mostrar todos los personajes
+        </button>
         <button id="load-less-btn" 
-                class="${
-                  allCharacters.length > initialCharacters.length ? "" : "hidden"
-                } bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
+                class="${isFiltering || allCharacters.length <= initialCharacters.length ? "hidden" : ""} bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
           Cargar menos personajes
         </button>
         <button id="load-more-btn" 
-                class="bg-gradient-to-r from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
+                class="${isFiltering ? "hidden" : ""} bg-gradient-to-r from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
           Cargar más personajes
         </button>
       </div>
@@ -171,6 +218,7 @@ export function renderCharacterCards(characters) {
   // Agregar event listeners a los botones
   const loadMoreBtn = document.querySelector("#load-more-btn");
   const loadLessBtn = document.querySelector("#load-less-btn");
+  const resetFiltersBtn = document.querySelector("#reset-filters-btn");
 
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", loadMoreCharacters);
@@ -178,6 +226,10 @@ export function renderCharacterCards(characters) {
 
   if (loadLessBtn) {
     loadLessBtn.addEventListener("click", loadLessCharacters);
+  }
+
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener("click", resetToInitialView);
   }
 }
 
