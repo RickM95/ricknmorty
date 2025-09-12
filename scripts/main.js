@@ -4,8 +4,10 @@ click();
 
 /* Starts the aplication when the DOM is loading */
 import { initializeCards } from "./cards.js";
+import { initializeFavorites } from "./favorites.js";
 document.addEventListener("DOMContentLoaded", () => {
   initializeCards();
+  initializeFavorites();
 });
 
 import { debounce, searchCharacter, fillSelectOptions, fillterAll } from "./geraldine.js";
