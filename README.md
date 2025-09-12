@@ -5,14 +5,14 @@ NEFI:
 - Modal de personajes
 - Favoritos
 - Darkmode
-EDMUND
+EDMUND:
 - Header Carrusel
 - Video de Episodio 
-SANTIAGO
+SANTIAGO:
 - Header Video
-JESUS
+JESUS:
 - Menu de navegación
-GERALDINE
+GERALDINE:
 - Filtros combinados
 - Busqueda con debounce
 - Darkmode
