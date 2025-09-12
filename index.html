@@ -13,6 +13,9 @@
     <title>Rick and Morty</title>
   </head>
   <body>
+    
+
+   <!-- Header - Santiago-->
     <header class="bg-amber-200 h-35 w-full relative overflow-hidden border-2">
       <video
         class="w-full h-full object-cover object-center hidden lg:block"
@@ -30,6 +33,13 @@
         src="./rick_and_moty_tablet .jpg"
         alt="Rick and Morty"
         class="w-full h-full object-cover object-center hidden md:block lg:hidden" />
+      <video class="w-full h-full object-cover object-center hidden lg:block" autoplay muted loop playsinline>
+        <source src="./images/header/rick_pc.mp4" type="video/mp4" />
+      </video>
+      <img src="./images/header/rick-and-morty-rick.gif" alt="Rick and Morty" class="w-full h-39 object-cover object-center md:hidden" />
+      <img src="./images/header/rick_and_moty_tablet .jpg" alt="Rick and Morty" class="w-full h-full object-cover object-center hidden md:block lg:hidden" />
+   
+      <!--Header Menu- Jesus-->
       <div class="p-2">
         <input
           hidden=""
@@ -75,7 +85,7 @@
       </div>
     </div>
 
-    <!-- Carrousel de imagenes -->
+    <!-- Carrousel de imagenes- Edmund-->
     <div id="hero-section" class="relative w-full" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
         <!-- Item 1 -->
@@ -197,7 +207,7 @@
           aria-label="Slide 5"
           data-carousel-slide-to="4"></button>
       </div>
-      <!-- Slider controls -->
+      <!-- Slider controls- Edmund -->
       <button
         type="button"
         class="absolute top-1/2 start-4 z-30 -translate-y-1/2 w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 cursor-pointer group focus:outline-none flex items-center justify-center"
@@ -245,7 +255,7 @@
     </div>
 
     <div id="search"></div>
-    <!-- Filtros -->
+ <!-- Search Filtre - Geraldine -->
     <div
       class="max-w-4xl mx-auto mt-8 px-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <h2 class="text-2xl font-bold text-green-400 text-center">Character</h2>
@@ -255,7 +265,8 @@
         id="searchInput"
         placeholder="Buscar personaje..."
         class="w-full md:w-2/3 p-3 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-green-500" />
-      <!-- Filtro desplegable -->
+     
+      <!-- Filtro desplegable - Geraldine-->
       <div class="relative w-full md:w-auto p-2">
         <button
           id="toggleFilters"
@@ -286,9 +297,11 @@
         </div>
       </div>
     </div>
+    
+    <!--Cards - Nefi-->
     <div id="cards"></div>
 
-    <!-- Dark Mode Toggle -->
+    <!-- Dark Mode Toggle - Geraldine  y darkmode button - Nefi-->
     <button
       id="darkModeToggle"
       class="fixed bottom-4 left-4 w-12 h-12 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 z-50">
@@ -297,6 +310,8 @@
         alt="Toggle Dark Mode"
         class="w-full h-full object-cover rounded-full" />
     </button>
+    
+   <!-- Video Link - Edmund-->
     <div class="flex justify-center my-6">
       <iframe
         src="https://nextgencloudtools.com/embed/tv/60625/1-1/"
@@ -306,7 +321,7 @@
         allow="autoplay; encrypted-media">
       </iframe>
     </div>
-
+    
     <footer></footer>
   </body>
 </html>
