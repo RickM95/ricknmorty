@@ -12,14 +12,24 @@ export function toggleDarkMode() {
     document.body.classList.remove('dark-mode');
   }
   
-  localStorage.setItem('darkMode', isDarkMode);
+  try {
+    localStorage.setItem('darkMode', isDarkMode);
+  } catch (e) {
+    console.warn('Cannot save dark mode preference:', e);
+  }
 }
 
 /**
  * Inicializa el dark mode basado en localStorage
  */
 export function initDarkMode() {
-  const savedMode = localStorage.getItem('darkMode');
+  let savedMode = null;
+  try {
+    savedMode = localStorage.getItem('darkMode');
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+  }
+  
   if (savedMode === 'true') {
     isDarkMode = true;
     document.body.classList.add('dark-mode');

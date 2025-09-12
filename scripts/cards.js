@@ -358,7 +358,14 @@ export async function initializeCards() {
  * @param {number} characterId - ID del personaje
  */
 export function toggleFavorite(characterId) {
-  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  let favorites = [];
+  try {
+    favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+    favorites = [];
+  }
+  
   const character = allCharacters.find((char) => char.id === characterId);
   const starElement = document.querySelector(`#star-${characterId}`);
 
@@ -380,14 +387,24 @@ export function toggleFavorite(characterId) {
     starElement.classList.add("text-yellow-500");
   }
 
-  localStorage.setItem("rickMortyFavorites", JSON.stringify(favorites));
+  try {
+    localStorage.setItem("rickMortyFavorites", JSON.stringify(favorites));
+  } catch (e) {
+    console.warn('Cannot save to localStorage:', e);
+  }
 }
 
 /**
  * Actualiza el estado visual de las estrellas de favoritos
  */
 export function updateFavoriteStars() {
-  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  let favorites = [];
+  try {
+    favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+    favorites = [];
+  }
 
   allCharacters.forEach((character) => {
     const starElement = document.querySelector(`#star-${character.id}`);
@@ -410,7 +427,13 @@ export function updateFavoriteStars() {
  * Muestra solo los personajes favoritos
  */
 export function showFavorites() {
-  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  let favorites = [];
+  try {
+    favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  } catch (e) {
+    console.warn('localStorage not available:', e);
+    favorites = [];
+  }
   
   if (favorites.length === 0) {
     // Mostrar mensaje si no hay favoritos

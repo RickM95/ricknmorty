@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://rickandmortyapi.com; connect-src 'self' https://rickandmortyapi.com;" />
     <link rel="stylesheet" href="./styles/output.css" />
     <link rel="stylesheet" href="styles/menu.css" />
     <link rel="stylesheet" href="styles/darkmode.css" />
@@ -127,7 +128,7 @@
     <div id="hero-section" class="relative w-full" data-carousel="slide">
       <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
         <!-- Item 1 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <div class="duration-700 ease-in-out" data-carousel-item>
           <img
             src="./images/Carousel/1.jpg"
             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
@@ -216,31 +217,31 @@
         class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
         <button
           type="button"
-          class="w-3 h-3 rounded-full"
+          class="w-3 h-3 rounded-full bg-white/50 hover:bg-white"
           aria-current="true"
           aria-label="Slide 1"
           data-carousel-slide-to="0"></button>
         <button
           type="button"
-          class="w-3 h-3 rounded-full"
+          class="w-3 h-3 rounded-full bg-white/30 hover:bg-white/50"
           aria-current="false"
           aria-label="Slide 2"
           data-carousel-slide-to="1"></button>
         <button
           type="button"
-          class="w-3 h-3 rounded-full"
+          class="w-3 h-3 rounded-full bg-white/30 hover:bg-white/50"
           aria-current="false"
           aria-label="Slide 3"
           data-carousel-slide-to="2"></button>
         <button
           type="button"
-          class="w-3 h-3 rounded-full"
+          class="w-3 h-3 rounded-full bg-white/30 hover:bg-white/50"
           aria-current="false"
           aria-label="Slide 4"
           data-carousel-slide-to="3"></button>
         <button
           type="button"
-          class="w-3 h-3 rounded-full"
+          class="w-3 h-3 rounded-full bg-white/30 hover:bg-white/50"
           aria-current="false"
           aria-label="Slide 5"
           data-carousel-slide-to="4"></button>
@@ -346,17 +347,7 @@
         alt="Toggle Dark Mode"
         class="w-full h-full object-cover rounded-full" />
     </button>
-<!-- comentario para actualizar el index -->
-    <!-- Video Link - Edmund-->
-    <div class="flex justify-center my-6 px-4">
-      <iframe
-        src="https://nextgencloudtools.com/embed/tv/60625/1-1/"
-        class="w-full max-w-4xl h-64 sm:h-80 md:h-96 lg:h-[450px] rounded-lg"
-        frameborder="0"
-        allowfullscreen
-        allow="autoplay; encrypted-media">
-      </iframe>
-    </div>
+<!-- Video section removed to prevent external script conflicts -->
 
     <footer></footer>
   </body>
