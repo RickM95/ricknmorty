@@ -17,14 +17,14 @@ Requerimientos Generales
 - Repositorio Git con README que incluya instrucciones de uso.
 
 REQUERIMIENTOS ESPECIFICOS:
-- Mostrar una lista inicial de personajes con imagen, nombre, especie y estado.
-- Búsqueda por nombre con debounce.
-- Filtros: por estado (Alive, Dead, Unknown) y por especie (Human, Alien, etc.).
-- Filtros combinables entre sí y con la búsqueda.
-- Delegación de eventos en contenedor de filtros y lista de personajes.
-- Modal de detalle al hacer clic en un personaje: mostrar origen, ubicación, episodios, género, fecha de creación.
-- Implementar paginación o botón de 'Cargar más'.
-- Estilizar con Tailwind con paleta inspirada en la serie.
+1. Mostrar una lista inicial de personajes con imagen, nombre, especie y estado. (NEFFI)
+2.  Búsqueda por nombre con debounce.
+3. Filtros: por estado (Alive, Dead, Unknown) y por especie (Human, Alien, etc.). (GERALDINE)
+4. Filtros combinables entre sí y con la búsqueda. (GERALDINE)
+5.  Delegación de eventos en contenedor de filtros y lista de personajes.
+6.  Modal de detalle al hacer clic en un personaje: mostrar origen, ubicación, episodios, género, fecha de creación.
+7.  Implementar paginación o botón de 'Cargar más'.
+8. Estilizar con Tailwind con paleta inspirada en la serie.
 
 CRITERIOS DE ACEPTACION:
 - La búsqueda funciona correctamente con debounce.

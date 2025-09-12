@@ -1,6 +1,11 @@
+
 /*Header Menu interaction*/
 import { click } from "../scripts/funtion-header.js";
 click();
+
+/*Carousel interaation*/
+import { initCarousel } from '/scripts/carousel.js';
+initCarousel();
 
 /* Starts the aplication when the DOM is loading */
 import { initializeCards } from "./cards.js";
@@ -10,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeFavorites();
 });
 
+/*Search & Search Preferences Interaction*/
 import { debounce, searchCharacter, fillSelectOptions, fillterAll } from "./geraldine.js";
 const searchInput = document.getElementById("searchInput");
 const debouncedSearch = debounce((e) => {
@@ -21,3 +27,4 @@ fillSelectOptions();
 [filterStatus, filterGender, filterSpecies].forEach((select) => {
   select.addEventListener("change", fillterAll);
 });
+
