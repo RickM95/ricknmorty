@@ -14,9 +14,7 @@ const favStar = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 
  */
 export async function fetchCharacters(page = 1) {
   try {
-    const response = await fetch(
-      `https://rickandmortyapi.com/api/character?page=${page}`
-    );
+    const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -73,31 +71,17 @@ export function createCharacterCard(character) {
         </button>
         
         <!-- Estado normal -->
-        <div id="normal-${
-          character.id
-        }" class="flex flex-col items-center text-center transition-all duration-500 md:justify-center md:h-full">
+        <div id="normal-${character.id}" class="flex flex-col items-center text-center transition-all duration-500 md:justify-center md:h-full">
           <img src="${character.image}" alt="${character.name}" 
                class="w-24 h-24 rounded-full border-4 border-lime-400 mb-4 object-cover transition-all duration-500 hover:scale-110 hover:border-yellow-400">
-          <h3 class="text-xl font-bold text-slate-800 mb-2 drop-shadow-lg">${
-            character.name
-          }</h3>
-          <p class="text-slate-700 mb-1"><span class="font-semibold text-green-700">Especie:</span> ${
-            character.species
-          }</p>
+          <h3 class="text-xl font-bold text-slate-800 mb-2 drop-shadow-lg">${character.name}</h3>
+          <p class="text-slate-700 mb-1"><span class="font-semibold text-green-700">Especie:</span> ${character.species}</p>
           <p class="text-slate-700"><span class="font-semibold text-green-700">Estado:</span> 
             <span class="inline-block w-2 h-2 rounded-full mr-1 ${
-              character.status === "Alive"
-                ? "bg-green-500"
-                : character.status === "Dead"
-                ? "bg-red-500"
-                : "bg-gray-500"
+              character.status === "Alive" ? "bg-green-500" : character.status === "Dead" ? "bg-red-500" : "bg-gray-500"
             }"></span>
             <span class="text-slate-800 font-medium">${
-              character.status === "Alive"
-                ? "Vivo"
-                : character.status === "Dead"
-                ? "Muerto"
-                : "Desconocido"
+              character.status === "Alive" ? "Vivo" : character.status === "Dead" ? "Muerto" : "Desconocido"
             }</span>
           </p>
         </div>
@@ -111,27 +95,17 @@ export function createCharacterCard(character) {
               <img src="${character.image}" alt="${character.name}" 
                    class="w-16 h-16 rounded-full border-3 border-lime-400 object-cover flex-shrink-0 transition-transform duration-300 hover:scale-105">
               <div class="flex-1">
-                <h3 class="text-lg font-bold text-slate-800 mb-2 drop-shadow-sm">${
-                  character.name
-                }</h3>
+                <h3 class="text-lg font-bold text-slate-800 mb-2 drop-shadow-sm">${character.name}</h3>
                 <div class="grid grid-cols-1 gap-1 text-sm">
                   <p class="text-slate-700"><span class="font-semibold text-green-700">Especie:</span> <span class="text-slate-800">${
                     character.species
                   }</span></p>
                   <p class="text-slate-700"><span class="font-semibold text-green-700">Estado:</span> 
                     <span class="inline-block w-2 h-2 rounded-full mr-1 ${
-                      character.status === "Alive"
-                        ? "bg-green-500"
-                        : character.status === "Dead"
-                        ? "bg-red-500"
-                        : "bg-gray-500"
+                      character.status === "Alive" ? "bg-green-500" : character.status === "Dead" ? "bg-red-500" : "bg-gray-500"
                     }"></span>
                     <span class="text-slate-800 font-medium">${
-                      character.status === "Alive"
-                        ? "Vivo"
-                        : character.status === "Dead"
-                        ? "Muerto"
-                        : "Desconocido"
+                      character.status === "Alive" ? "Vivo" : character.status === "Dead" ? "Muerto" : "Desconocido"
                     }</span>
                   </p>
                   <p class="text-slate-700"><span class="font-semibold text-green-700">Origen:</span> <span class="text-slate-800">${
@@ -141,11 +115,7 @@ export function createCharacterCard(character) {
                     character.location.name
                   }</span></p>
                   <p class="text-slate-700"><span class="font-semibold text-green-700">Género:</span> <span class="text-slate-800">${
-                    character.gender === "Male"
-                      ? "Masculino"
-                      : character.gender === "Female"
-                      ? "Femenino"
-                      : character.gender
+                    character.gender === "Male" ? "Masculino" : character.gender === "Female" ? "Femenino" : character.gender
                   }</span></p>
                   <p class="text-slate-700"><span class="font-semibold text-green-700">Episodios:</span> <span class="text-slate-800">${
                     character.episode.length
@@ -175,9 +145,7 @@ export function renderCharacterCards(characters) {
   if (characters.error) {
     cardsHTML = createErrorCard();
   } else {
-    cardsHTML = characters
-      .map((character) => createCharacterCard(character))
-      .join("");
+    cardsHTML = characters.map((character) => createCharacterCard(character)).join("");
   }
 
   cardsContainer.innerHTML = `
@@ -188,9 +156,7 @@ export function renderCharacterCards(characters) {
       <div class="text-center mt-8 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
         <button id="load-less-btn" 
                 class="${
-                  allCharacters.length > initialCharacters.length
-                    ? ""
-                    : "hidden"
+                  allCharacters.length > initialCharacters.length ? "" : "hidden"
                 } bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg backdrop-blur-sm">
           Cargar menos personajes
         </button>
@@ -293,49 +259,49 @@ export async function initializeCards() {
  * @param {number} characterId - ID del personaje
  */
 export function toggleFavorite(characterId) {
-  const favorites = JSON.parse(localStorage.getItem('rickMortyFavorites') || '[]');
-  const character = allCharacters.find(char => char.id === characterId);
+  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+  const character = allCharacters.find((char) => char.id === characterId);
   const starElement = document.querySelector(`#star-${characterId}`);
-  
+
   if (!character) return;
-  
-  const existingIndex = favorites.findIndex(fav => fav.id === characterId);
-  
+
+  const existingIndex = favorites.findIndex((fav) => fav.id === characterId);
+
   if (existingIndex > -1) {
     // Remover de favoritos
     favorites.splice(existingIndex, 1);
-    starElement.setAttribute('fill', 'none');
-    starElement.classList.remove('text-yellow-500');
-    starElement.classList.add('text-yellow-400');
+    starElement.setAttribute("fill", "none");
+    starElement.classList.remove("text-yellow-500");
+    starElement.classList.add("text-yellow-400");
   } else {
     // Agregar a favoritos
     favorites.push(character);
-    starElement.setAttribute('fill', 'currentColor');
-    starElement.classList.remove('text-yellow-400');
-    starElement.classList.add('text-yellow-500');
+    starElement.setAttribute("fill", "currentColor");
+    starElement.classList.remove("text-yellow-400");
+    starElement.classList.add("text-yellow-500");
   }
-  
-  localStorage.setItem('rickMortyFavorites', JSON.stringify(favorites));
+
+  localStorage.setItem("rickMortyFavorites", JSON.stringify(favorites));
 }
 
 /**
  * Actualiza el estado visual de las estrellas de favoritos
  */
 export function updateFavoriteStars() {
-  const favorites = JSON.parse(localStorage.getItem('rickMortyFavorites') || '[]');
-  
-  allCharacters.forEach(character => {
+  const favorites = JSON.parse(localStorage.getItem("rickMortyFavorites") || "[]");
+
+  allCharacters.forEach((character) => {
     const starElement = document.querySelector(`#star-${character.id}`);
     if (starElement) {
-      const isFavorite = favorites.some(fav => fav.id === character.id);
+      const isFavorite = favorites.some((fav) => fav.id === character.id);
       if (isFavorite) {
-        starElement.setAttribute('fill', 'currentColor');
-        starElement.classList.remove('text-yellow-400');
-        starElement.classList.add('text-yellow-500');
+        starElement.setAttribute("fill", "currentColor");
+        starElement.classList.remove("text-yellow-400");
+        starElement.classList.add("text-yellow-500");
       } else {
-        starElement.setAttribute('fill', 'none');
-        starElement.classList.remove('text-yellow-500');
-        starElement.classList.add('text-yellow-400');
+        starElement.setAttribute("fill", "none");
+        starElement.classList.remove("text-yellow-500");
+        starElement.classList.add("text-yellow-400");
       }
     }
   });

@@ -1,3 +1,4 @@
+import { renderCharacterCards } from "./cards.js";
 //---------FILTER DEBOUNCE BY CHARACTER -----------------//
 export function debounce(fn, delay) {
   let timeoutId;
@@ -17,7 +18,7 @@ export async function searchCharacter(query) {
       console.log("No characters found");
       return;
     }
-    console.log(data.results);
+    renderCharacterCards(data.results);
   } catch (error) {
     console.error("Error Searching:", error);
   }
@@ -38,22 +39,24 @@ toggleFiltersBtn.addEventListener("click", () => {
 const statusOptions = ["alive", "dead", "unknown"];
 const genderOptions = ["female", "male", "genderless", "unknown"];
 const speciesOptions = [
-  "Human",
-  "Alien",
-  "Humanoid",
-  "Poopybutthole",
-  "Mythological Creature",
-  "Robot",
-  "Cronenberg",
-  "Disease",
-  "Animal",
-  "Unknown",
+  "human",
+  "alien",
+  "humanoid",
+  "poopybutthole",
+  "mythological creature",
+  "robot",
+  "cronenberg",
+  "disease",
+  "animal",
+  "unknown",
 ];
 // FILL SELECTIONS
 export function fillSelectOptions() {
   filterStatus.innerHTML = `<option value="">Todos</option>` + statusOptions.map((s) => `<option value="${s}">${s}</option>`).join("");
   filterGender.innerHTML = `<option value="">Todos</option>` + genderOptions.map((g) => `<option value="${g}">${g}</option>`).join("");
-  filterSpecies.innerHTML = `<option value="">Todos</option>` + speciesOptions.map((sp) => `<option value="${sp}">${sp}</option>`).join("");
+  filterSpecies.innerHTML =
+    `<option value="">Todos</option>` +
+    speciesOptions.map((sp) => `<option value="${sp}">${sp.charAt(0).toUpperCase() + sp.slice(1)}</option>`).join("");
 }
 
 // LET'S FILTER
@@ -74,10 +77,13 @@ export async function fillterAll() {
       alert("No results found");
       return;
     }
-    console.log(data.results);
+    renderCharacterCards(data.results);
   } catch (error) {
     console.error("Error Filtering:", error);
   }
 }
 
 // lISTEN TO CHANGES IN FILTERS
+[filterStatus, filterGender, filterSpecies].forEach((select) => {
+  select.addEventListener("change", fillterAll);
+});
