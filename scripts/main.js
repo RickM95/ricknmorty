@@ -1,84 +1,49 @@
-// Dynamic imports for better GitHub Pages compatibility
-let appModules = {};
+// Import all modules
+import { click } from "./funtion-header.js";
+import { initCarousel } from './carousel.js';
+import { initializeCards, showFavorites, showAllCharacters, toggleFavorite, openCardDetails, closeCardDetails } from "./cards.js";
+import { initializeFavorites } from "./favorites.js";
+import { initDarkMode, toggleDarkMode } from "./darkmode.js";
+import { debounce, searchCharacter, fillSelectOptions, initializeFilters } from "./geraldine.js";
 
-async function loadModules() {
-  try {
-    const [headerModule, carouselModule, cardsModule, favoritesModule, darkmodeModule, geraldineModule] = await Promise.all([
-      import('./funtion-header.js'),
-      import('./carousel.js'),
-      import('./cards.js'),
-      import('./favorites.js'),
-      import('./darkmode.js'),
-      import('./geraldine.js')
-    ]);
-    
-    appModules = {
-      header: headerModule,
-      carousel: carouselModule,
-      cards: cardsModule,
-      favorites: favoritesModule,
-      darkmode: darkmodeModule,
-      geraldine: geraldineModule
-    };
-    
-    // Make functions globally available
-    window.showFavorites = cardsModule.showFavorites;
-    window.showAllCharacters = cardsModule.showAllCharacters;
-    window.toggleFavorite = cardsModule.toggleFavorite;
-    window.openCardDetails = cardsModule.openCardDetails;
-    window.closeCardDetails = cardsModule.closeCardDetails;
-    window.toggleDarkMode = darkmodeModule.toggleDarkMode;
-    
-    return true;
-  } catch (error) {
-    console.error('Error loading modules:', error);
-    return false;
-  }
-}
+// Make functions globally available
+window.showFavorites = showFavorites;
+window.showAllCharacters = showAllCharacters;
+window.toggleFavorite = toggleFavorite;
+window.openCardDetails = openCardDetails;
+window.closeCardDetails = closeCardDetails;
+window.toggleDarkMode = toggleDarkMode;
 
 // Initialize search function
 function initializeSearch() {
   const searchInput = document.getElementById("searchInput");
-  if (searchInput && appModules.geraldine) {
-    const debouncedSearch = appModules.geraldine.debounce((e) => {
+  if (searchInput) {
+    const debouncedSearch = debounce((e) => {
       const query = e.target.value.trim();
-      appModules.geraldine.searchCharacter(query);
+      searchCharacter(query);
     }, 500);
     searchInput.addEventListener("input", debouncedSearch);
   }
 }
 
 // Initialize everything when DOM is loaded
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log('Loading Rick and Morty app modules...');
+document.addEventListener("DOMContentLoaded", () => {
+  console.log('Initializing Rick and Morty app...');
   
-  const modulesLoaded = await loadModules();
+  // Initialize header menu
+  click();
   
-  if (!modulesLoaded) {
-    console.error('Failed to load modules');
-    return;
-  }
+  // Initialize carousel
+  initCarousel();
   
-  console.log('Modules loaded, initializing app...');
+  // Initialize main components
+  initializeCards();
+  initializeFavorites();
+  initDarkMode();
+  initializeSearch();
+  initializeFilters();
+  fillSelectOptions();
   
-  try {
-    // Initialize header menu
-    appModules.header.click();
-    
-    // Initialize carousel
-    appModules.carousel.initCarousel();
-    
-    // Initialize main components
-    appModules.cards.initializeCards();
-    appModules.favorites.initializeFavorites();
-    appModules.darkmode.initDarkMode();
-    initializeSearch();
-    appModules.geraldine.initializeFilters();
-    appModules.geraldine.fillSelectOptions();
-    
-    console.log('App initialization complete');
-  } catch (error) {
-    console.error('Error during initialization:', error);
-  }
+  console.log('App initialization complete');
 });
 
